@@ -5,7 +5,7 @@ using namespace std;
 int main()
 {
   int count = 0;
-  // my project
+  // my project color vision project
   cout<< "Enter Your to tatal number of color vision (RGB) tests"<<"\n";
 
   cin >> count;
