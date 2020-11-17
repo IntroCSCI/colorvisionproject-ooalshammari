@@ -7,6 +7,8 @@ struct _pixel {
     int green;
     int blue;
 } ;
+
+//// functions/////////////
 void collect_user_data(int user[3] );
 double check_percentage_difference(int user[3],int index,vector <_pixel> my_pixel);
 bool check_result (double percentage_error);
