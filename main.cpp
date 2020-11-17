@@ -84,7 +84,7 @@ double check_percentage_difference(int user[3],int index,vector <_pixel> my_pixe
 
 bool check_result(double percentage_error)
 {
-  cout << "per2"<< percentage_error <<endl;
+   
   if (percentage_error > 10.0)
   return false;
   else
