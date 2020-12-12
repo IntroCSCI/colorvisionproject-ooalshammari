@@ -1,4 +1,5 @@
 #include <iostream>
+#include <fstream>
 #include <vector> 
 using namespace std;
 
@@ -13,28 +14,21 @@ void collect_user_data(int user[3] );
 double check_percentage_difference(int user[3],int index,vector <_pixel> my_pixel);
 bool check_result (double percentage_error);
 
-int user_input[3];
-bool result = false;
-void fill_vector(FILE *myfile,vector <_pixel> &my_pixel);
+
+
+void fill_vector(ifstream &is,vector <_pixel> &my_pixel);
 
 
 int main()
 {
   double diff;
+  bool result = false;
+  int user_input[3];
   vector<_pixel> p;
-  FILE *_myfile = fopen ("RGB_DATA.txt", "r");
-  if (_myfile == NULL)
-  {
-      cout<< "unable to load RGB Data"<<"\n";
-      return 0;
-  }
- else{
-   fill_vector(_myfile , p);
- }
-   
-   
+  ifstream is("RGB_DATA.txt");
   
- 
+   fill_vector(is , p);
+  
    for (int i =0; i < 9; i++)
    {
       cout<< "Enter (RGB) for image "<< i<<"\n";
@@ -44,19 +38,24 @@ int main()
       {
           cout << "test did not passed!!"<<endl;
       }
+      else 
+          cout << "test passed!!"<<endl;
    }
 
   return 0;
 }
 
-void fill_vector(FILE *myfile,vector <_pixel> &my_pixel)
+void fill_vector(ifstream &is,vector <_pixel> &my_pixel)
 {
+    string x;
+     
      for(int i =0 ; i < 9 ; i++)
      {
          my_pixel.push_back(_pixel());
-         fscanf (myfile, "%d", & my_pixel[i].red);
-         fscanf (myfile, "%d", & my_pixel[i].green);
-         fscanf (myfile, "%d", & my_pixel[i].blue);
+         is >>  my_pixel[i].red;
+         is >>  my_pixel[i].green;
+         is >>  my_pixel[i].blue;
+         
        
      }
      
@@ -78,7 +77,7 @@ double check_percentage_difference(int user[3],int index,vector <_pixel> my_pixe
     double actual_pixel = my_pixel[index].red + my_pixel[index].green + my_pixel[index].blue ;
     percentage =  (user_sum - actual_pixel)/actual_pixel;
     percentage *=100; 
-    cout << "per"<< percentage <<endl;
+     
     return abs(percentage);
 }
 
